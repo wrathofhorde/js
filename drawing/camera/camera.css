@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+}
+
+.camera {
+  width: 204px;
+  height: 154px;
+  border-radius: 10%;
+  background-color: #d6d6d6;
+  box-shadow: 0 10px 15px -13px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.lens {
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  border: 10px solid #f5f5f5;
+  background-color: #00695c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 0 0 #c0c0c0;
+}
+
+.iris {
+  width: 0;
+  height: 0;
+  border-top: 30px solid #008979;
+  border-right: 30px solid #4d86ac;
+  border-bottom: 30px solid #80cbc4;
+  border-left: 30px solid #26a69a;
+  border-radius: 50%;
+}
+
+.flash {
+  width: 20px;
+  height: 20px;
+  background-color: whitesmoke;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 50%;
+  box-shadow: 0 4px 0 0 #c0c0c0;
+}
+
+.button {
+  width: 30px;
+  height: 5px;
+  background-color: rgb(40, 110, 112);
+  border-radius: 60px;
+  position: absolute;
+  top: -5px;
+  left: 16px;
+}
