@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(213, 161, 246);
+}
+
+.watermelon {
+  width: 320px;
+  height: 160px;
+  background-color: #fd6c64;
+  border-left: 20px solid #5af564;
+  border-bottom: 20px solid #5af564;
+  border-right: 20px solid #5af564;
+  border-radius: 0 0 160px 160px;
+}
+
+span {
+  width: 10px;
+  height: 10px;
+  background-color: #232323;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 18px;
+}
+
+span:nth-child(7),
+span:nth-child(12),
+span:nth-child(13),
+span:nth-child(14) {
+  opacity: 0;
+}
