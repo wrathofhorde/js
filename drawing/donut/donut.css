@@ -59,7 +59,7 @@ body {
   border-top: 0;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
-  top: 24%;
+  top: 22%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -72,7 +72,7 @@ body {
   position: absolute;
   border-radius: 50%;
   top: -150%;
-  left: -10%;
+  left: -20%;
 }
 
 .face::after {
@@ -83,7 +83,7 @@ body {
   position: absolute;
   border-radius: 50%;
   top: -150%;
-  right: -10%;
+  right: -20%;
 }
 
 .highlight {
