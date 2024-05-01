@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fcd458;
+}
+
+.container {
+  position: relative;
+  width: 350px;
+  height: 600px;
+  background-color: #fcd458;
+}
+
+.eye {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: black;
+  position: absolute;
+  top: 30%;
+  left: 13%;
+}
+
+.-r {
+  left: 65%;
+}
+
+.eyeball {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fafafa;
+  position: absolute;
+  top: 13%;
+  right: 14%;
+  animation: eyes 3s infinite;
+}
+
+.nose {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px 8px 16px 16px;
+  background-color: #000000;
+  position: absolute;
+  top: 44%;
+  left: 47%;
+}
+
+.cheek {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #e14b42;
+  position: absolute;
+  top: 48%;
+  left: 4%;
+}
+
+.cheek.-r {
+  left: 80%;
+}
+
+.mouth {
+  width: 96px;
+  height: 96px;
+  background-color: #83342f;
+  border-radius: 16px 16px 50% 50%;
+  position: absolute;
+  top: 50%;
+  left: 36%;
+  overflow: hidden;
+}
+
+.mouth::before {
+  content: "";
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #fcd458;
+  position: absolute;
+  top: -39%;
+  left: -17%;
+}
+
+.mouth::after {
+  content: "";
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #fcd458;
+  position: absolute;
+  top: -39%;
+  right: -17%;
+}
+
+.tongue {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #e97b7c;
+  position: absolute;
+  top: 61%;
+  left: 16%;
+}
+
+@keyframes eyes {
+  0% {
+    left: 44%;
+  }
+  50% {
+    left: 15%;
+  }
+  100% {
+    left: 44%;
+  }
+}
