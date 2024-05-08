@@ -1,11 +1,15 @@
-window.onload = () => {
-  const afterNumber = document.getElementsByClassName("after-number")[0];
-  console.log(afterNumber);
+const DIV_HIDE = "none";
+const DIV_SHOW = "block";
 
-  afterNumber.addEventListener("click", () => {
-    console.log("hello");
+window.onload = () => {
+  const wrapper = document.getElementById("wrapper");
+  wrapper.style.display = DIV_HIDE;
+  wrapper.addEventListener("click", () => {
+    wrapper.style.display = DIV_HIDE;
   });
 
-  const wrapper = document.getElementsByClassName("wrapper")[0];
-  console.log(wrapper);
+  const afterNumber = document.getElementById("after-number");
+  afterNumber.addEventListener("click", () => {
+    wrapper.style.display = DIV_SHOW;
+  });
 };
