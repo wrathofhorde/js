@@ -3,13 +3,15 @@ const DIV_SHOW = "block";
 
 window.onload = () => {
   const wrapper = document.getElementById("wrapper");
-  wrapper.style.display = DIV_HIDE;
-  wrapper.addEventListener("click", () => {
-    wrapper.style.display = DIV_HIDE;
-  });
-
   const afterNumber = document.getElementById("after-number");
+
+  wrapper.style.display = DIV_HIDE;
+
   afterNumber.addEventListener("click", () => {
     wrapper.style.display = DIV_SHOW;
+  });
+
+  wrapper.addEventListener("click", () => {
+    wrapper.style.display = DIV_HIDE;
   });
 };
