@@ -2,6 +2,21 @@ doctype html
 html(lang = "ko")
     head 
         title #{pageTitle} | iTube
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body 
-        block content
-        include partials/footer
+        header 
+            if fakeUser.loggedIn
+                small Hello, #{fakeUser.username}!
+            nav 
+                ul 
+                    if fakeUser.loggedIn
+                        li 
+                            a(ref="/logout") Log out
+                    else 
+                        li 
+                            a(ref="/login") Login
+
+            h1 #{pageTitle}
+        main 
+            block content
+            include partials/footer
