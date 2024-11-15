@@ -1,8 +1,8 @@
 import express from "express";
-import { watch } from "../controllers/videoController";
+import { see } from "../controllers/videoController";
 
 const videoRouter = express.Router();
 
-videoRouter.get("/watch", watch);
+videoRouter.get("/:id(\\d+)", see);
 
 export default videoRouter;
