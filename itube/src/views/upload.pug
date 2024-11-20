@@ -1,0 +1,10 @@
+extends base
+
+block content 
+    if errorMessage 
+        h3 #{errorMessage}
+    form(method="POST")
+        input(placeholder="Title", required, type="text", name="title", maxLength=32)
+        input(placeholder="Description", required, type="text", name="description", maxLength=128)
+        input(placeholder="Hashtags", required, type="text", name="hashtags")
+        input(type="submit", value="Upload Video")
