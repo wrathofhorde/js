@@ -1,8 +1,8 @@
 import morgan from "morgan";
 import express from "express";
+import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
-import globalRouter from "./routers/globalRouter";
 
 const serv = express();
 
@@ -11,7 +11,7 @@ serv.set("views", process.cwd() + "/src/views");
 serv.use(morgan("dev"));
 serv.use(express.urlencoded({ extended: true }));
 
-serv.use("/", globalRouter);
+serv.use("/", rootRouter);
 serv.use("/users", userRouter);
 serv.use("/videos", videoRouter);
 
