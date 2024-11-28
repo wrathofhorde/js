@@ -1,7 +1,7 @@
 doctype html 
 html(lang = "ko")
     head 
-        title #{pageTitle} | iTube
+        title #{pageTitle} | #{siteName}
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body 
         header 
@@ -13,8 +13,16 @@ html(lang = "ko")
                         a(href="/videos/upload") Upload video
                     li 
                         a(href="/search") Search
-                    li 
-                        a(href="/join") Join
+                    if loggedIn
+                        li 
+                            a(href="/users/logout") Log Out
+                        li 
+                            a(href="/users/logout") #{user.name}의 Profile
+                    else
+                        li 
+                            a(href="/login") Login
+                        li 
+                            a(href="/join") Join
 
             h1 #{pageTitle}
         main 
