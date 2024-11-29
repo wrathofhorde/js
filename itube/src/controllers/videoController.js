@@ -44,22 +44,27 @@ export const getEdit = async (req, res) => {
 };
 
 export const postEdit = async (req, res) => {
-  const { id } = req.params;
-  console.log(req.body);
-  const { title, description, hashtags } = req.body;
-  const video = await Video.exists({ _id: id });
+  try {
+    const { id } = req.params;
+    // console.log(req.body);
+    const { title, description, hashtags } = req.body;
+    const video = await Video.exists({ _id: id });
 
-  if (!video) {
-    return res.status(404).render("404", { pageTitle: "Video not found." });
+    if (!video) {
+      return res.status(404).render("404", { pageTitle: "Video not found." });
+    }
+
+    await Video.findByIdAndUpdate(id, {
+      title,
+      description,
+      hashtags: Video.formatHashtags(hashtags),
+    });
+
+    return res.redirect(`/videos/${id}`);
+  } catch (err) {
+    console.log(err);
+    res.redirect("/");
   }
-
-  await Video.findByIdAndUpdate(id, {
-    title,
-    description,
-    hashtags: Video.formatHashtags(hashtags),
-  });
-
-  return res.redirect(`/videos/${id}`);
 };
 
 export const getUpload = (req, res) => {
