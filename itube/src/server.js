@@ -5,7 +5,7 @@ import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
-import { sessionMiddleware } from "./middleware";
+import { localMiddleware } from "./middleware";
 
 const serv = express();
 
@@ -28,7 +28,7 @@ serv.use(
 //     next();
 //   });
 // });
-serv.use(sessionMiddleware);
+serv.use(localMiddleware);
 
 serv.use("/", rootRouter);
 serv.use("/users", userRouter);

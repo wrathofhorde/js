@@ -62,6 +62,7 @@ export const postLogin = async (req, res) => {
     const pageTitle = "Login";
     const errorMessage = "Account Error";
     const { username, password } = req.body;
+
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(400).render("login", { pageTitle, errorMessage });
@@ -92,4 +93,58 @@ export const logout = (req, res) => {
     res.redirect("/");
   }
 };
+
+export const getEdit = (req, res) => {
+  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+};
+
+export const postEdit = async (req, res) => {
+  try {
+    const {
+      session: {
+        user: { _id },
+      },
+      body: { name, username, email, location },
+    } = req;
+
+    const updated = {};
+    if (name !== req.session.user.name) {
+      updated.name = name;
+    }
+    if (email !== req.session.user.email) {
+      updated.email = email;
+    }
+    if (username !== req.session.user.username) {
+      updated.username = username;
+    }
+    if (location !== req.session.user.location) {
+      updated.location = location;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        ...updated,
+      },
+      { new: true }
+    );
+
+    // console.log("updatedUser", updatedUser);
+    // req.session.user = {
+    //   email,
+    //   user,
+    //   username,
+    //   location,
+    //   ...req.session.user,
+    // };
+
+    req.session.user = updatedUser;
+
+    return res.redirect("/users/edit");
+  } catch (err) {
+    console.log(err);
+    return res.redirect("/");
+  }
+};
+
 export const remove = (req, res) => res.send("Remove");

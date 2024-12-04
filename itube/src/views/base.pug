@@ -10,14 +10,14 @@ html(lang = "ko")
                     li 
                         a(href="/") Home
                     li 
-                        a(href="/videos/upload") Upload video
-                    li 
                         a(href="/search") Search
                     if loggedIn
                         li 
-                            a(href="/users/logout") Log Out
+                            a(href="/videos/upload") Upload video
                         li 
-                            a(href="/users/logout") #{user.name}의 Profile
+                            a(href="/users/edit") Edit Profile
+                        li 
+                            a(href="/users/logout") Log Out
                     else
                         li 
                             a(href="/login") Login
