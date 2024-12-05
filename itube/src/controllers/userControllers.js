@@ -3,7 +3,7 @@ import User from "../models/User";
 
 export const getJoin = (req, res) => {
   try {
-    res.render("join", { pageTitle: "Join" });
+    res.render("users/join", { pageTitle: "Join" });
   } catch (err) {
     console.log(err);
     res.redirect("/");
@@ -14,8 +14,8 @@ export const postJoin = async (req, res) => {
   try {
     const { email, username, name, password, password2, location } = req.body;
 
-    if (password != +password2) {
-      return res.status(400).render("join", {
+    if (password !== password2) {
+      return res.status(400).render("users/join", {
         pageTitle: "Join",
         errorMessage: "Password confirmation is not matched",
       });
@@ -24,7 +24,7 @@ export const postJoin = async (req, res) => {
     const exists = await User.exists({ $or: [{ email }, { username }] });
 
     if (exists) {
-      return res.status(400).render("join", {
+      return res.status(400).render("users/join", {
         pageTitle: "Join",
         errorMessage: "This email/username is alread used",
       });
@@ -39,7 +39,7 @@ export const postJoin = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(400).render("join", {
+    return res.status(400).render("users/join", {
       pageTitle: "Join",
       errorMessage: err._message,
     });
@@ -50,7 +50,7 @@ export const postJoin = async (req, res) => {
 
 export const getLogin = (req, res) => {
   try {
-    res.render("login", { pageTitle: "Login" });
+    res.render("users/login", { pageTitle: "Login" });
   } catch (err) {
     console.log(err);
     res.redirect("/");
@@ -65,12 +65,12 @@ export const postLogin = async (req, res) => {
 
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).render("login", { pageTitle, errorMessage });
+      return res.status(400).render("users/login", { pageTitle, errorMessage });
     }
 
     const matched = await bcrypt.compare(password, user.password);
     if (!matched) {
-      return res.status(400).render("login", { pageTitle, errorMessage });
+      return res.status(400).render("users/login", { pageTitle, errorMessage });
     }
 
     req.session.user = user;
@@ -95,7 +95,7 @@ export const logout = (req, res) => {
 };
 
 export const getEdit = (req, res) => {
-  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+  return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 };
 
 export const postEdit = async (req, res) => {
@@ -105,6 +105,7 @@ export const postEdit = async (req, res) => {
         user: { _id },
       },
       body: { name, username, email, location },
+      file,
     } = req;
 
     const updated = {};
@@ -119,6 +120,9 @@ export const postEdit = async (req, res) => {
     }
     if (location !== req.session.user.location) {
       updated.location = location;
+    }
+    if (file) {
+      updated.avatarUrl = file.path;
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -141,6 +145,39 @@ export const postEdit = async (req, res) => {
     req.session.user = updatedUser;
 
     return res.redirect("/users/edit");
+  } catch (err) {
+    console.log(err);
+    return res.redirect("/");
+  }
+};
+
+export const getChangePassword = (req, res) => {
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+
+export const postChangePassword = async (req, res) => {
+  try {
+    const {
+      session: {
+        user: { _id },
+      },
+      body: { oldPassword, newPassword, confirmPassword },
+    } = req;
+
+    const user = await User.findById(_id);
+    const matched = await bcrypt.compare(oldPassword, user.password);
+
+    if (!matched || newPassword !== confirmPassword) {
+      return res.status(400).render("users/change-password", {
+        pageTitle: "Change Password",
+        errorMessage: "Change Password Error!",
+      });
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    return res.redirect("logout");
   } catch (err) {
     console.log(err);
     return res.redirect("/");

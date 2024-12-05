@@ -1,9 +1,15 @@
-extends base
+extends ../base
 
 block content
-    form(method="POST")
+    if user.avatarUrl
+        img(src="/"+user.avatarUrl width="100" height="100")
+    form(method="POST", enctype="multipart/form-data")
+        label(for="avatar" ) Avatar
+        input(type="file", id="avatar", accept="image/*", name="avatar")
         input(placeholder="Name", name="name", type="text", required, value=user.name)
         input(placeholder="E-mail", name="email", type="email", required, value=user.email)
         input(placeholder="Username", name="username", type="text", required, value=user.username)
         input(placeholder="Location", name="location", type="text", required, value=user.location)
         input(type="submit", value="Update Profile")
+        hr
+        a(href="change-password") Change Password &rarr;
