@@ -22,12 +22,16 @@ serv.use(
   })
 );
 
+serv.use("/uploads/videos", express.static("uploads/videos"));
+serv.use("/uploads/avatars", express.static("uploads/avatars"));
+
 // serv.use((req, res, next) => {
 //   req.sessionStore.all((err, obj) => {
 //     console.log(obj);
 //     next();
 //   });
 // });
+
 serv.use(localMiddleware);
 
 serv.use("/", rootRouter);
