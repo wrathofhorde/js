@@ -4,6 +4,7 @@ import {
   remove,
   getEdit,
   postEdit,
+  getProfile,
   getChangePassword,
   postChangePassword,
 } from "../controllers/userControllers";
@@ -23,5 +24,7 @@ userRouter
   .all(protectorMiddleware)
   .get(getChangePassword)
   .post(postChangePassword);
+
+userRouter.get("/:id", getProfile);
 
 export default userRouter;
