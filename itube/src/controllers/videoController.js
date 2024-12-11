@@ -1,3 +1,4 @@
+import User from "../models/User";
 import Video from "../models/Video";
 
 export const home = async (req, res) => {
@@ -14,7 +15,7 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   try {
     const { id } = req.params;
-    const video = await Video.findById(id);
+    const video = await Video.findById(id).populate("owner");
 
     if (!video) {
       return res.status(404).render("404", { pageTitle: "Video not found." });
@@ -34,6 +35,12 @@ export const getEdit = async (req, res) => {
 
     if (video == null) {
       return res.status(404).render("404", { pageTitle: "Video not found." });
+    }
+
+    const userId = req.session.user._id;
+
+    if (String(video.owner) !== String(userId)) {
+      return res.status(403).redirect("/");
     }
 
     return res.render("videos/edit", {
@@ -76,14 +83,24 @@ export const getUpload = (req, res) => {
 
 export const postUpload = async (req, res) => {
   try {
-    const file = req.file;
-    const { title, description, hashtags } = req.body;
-    await Video.create({
+    const {
+      session: {
+        user: { _id },
+      },
+      file,
+      body: { title, description, hashtags },
+    } = req;
+
+    const newVideo = await Video.create({
       fileUrl: file.path,
       title,
       description,
       hashtags: Video.formatHashtags(hashtags),
+      owner: _id,
     });
+    const user = await User.findById(_id);
+    user.videos.push(newVideo._id);
+    user.save();
 
     return res.redirect("/");
   } catch (err) {
@@ -98,6 +115,15 @@ export const postUpload = async (req, res) => {
 export const deleteVideo = async (req, res) => {
   try {
     const { id } = req.params;
+    const video = Video.findById(id);
+    if (!video) {
+      return res.status(404).render("404", { pageTitle: "Video not found." });
+    }
+    const userId = req.session.user._id;
+    if (String(video.owner) !== String(userId)) {
+      return res.status(403).redirect("/");
+    }
+
     await Video.findByIdAndDelete(id);
   } catch (err) {
     console.log(err);
