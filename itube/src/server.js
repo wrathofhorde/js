@@ -22,8 +22,8 @@ serv.use(
   })
 );
 
-serv.use("/uploads/videos", express.static("uploads/videos"));
-serv.use("/uploads/avatars", express.static("uploads/avatars"));
+serv.use("/static", express.static("assets"));
+serv.use("/uploads", express.static("uploads"));
 
 // serv.use((req, res, next) => {
 //   req.sessionStore.all((err, obj) => {
