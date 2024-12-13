@@ -1,5 +1,12 @@
-@import "./variables";
+@import "./config/_reset.scss";
+@import "./config/_variables.scss";
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 body {
-  background-color: $red;
+  color: whitesmoke;
+  background-color: $bg;
 }
