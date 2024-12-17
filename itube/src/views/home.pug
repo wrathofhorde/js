@@ -4,7 +4,8 @@ include mixins/video
 block content
     h3 Welcome home to watch trending videos!!!
     
-    each item in videos 
-        +video(item) 
-    else 
-        h3 Noting found
+    div
+        each item in videos 
+            +video(item) 
+        else 
+            span.empty__message No video found

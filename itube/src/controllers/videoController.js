@@ -3,7 +3,9 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({}).sort({ createdAt: "desc" });
+    const videos = await Video.find({})
+      .sort({ createdAt: "desc" })
+      .populate("owner");
     // console.log(videos);
     return res.render("home", { pageTitle: "Home", videos });
   } catch (err) {
@@ -142,7 +144,7 @@ export const search = async (req, res) => {
         title: {
           $regex: new RegExp(`${keyword}`, "i"),
         },
-      });
+      }).populate("owner");
     }
 
     return res.render("videos/search", { pageTitle: "Search", videos });
