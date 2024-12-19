@@ -1,2 +1,5 @@
-// .video__grid {
-// }
+.video__grid {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
