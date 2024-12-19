@@ -2,6 +2,7 @@ import morgan from "morgan";
 import express from "express";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import apiRouter from "./routers/apiRouter";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -35,6 +36,7 @@ serv.use("/uploads", express.static("uploads"));
 serv.use(localMiddleware);
 
 serv.use("/", rootRouter);
+serv.use("/api", apiRouter);
 serv.use("/users", userRouter);
 serv.use("/videos", videoRouter);
 

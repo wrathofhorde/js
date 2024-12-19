@@ -6,6 +6,16 @@ header {
   .header__logo {
     color: $red;
     font-size: 38px;
+    position: relative;
+    .bg {
+      background-color: aliceblue;
+      width: 50%;
+      height: 50%;
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      z-index: -1;
+    }
   }
   ul {
     display: flex;
@@ -19,10 +29,11 @@ header {
     }
     i {
       font-size: 16px;
+      color: #f2f4f4;
     }
   }
   .header__btn {
-    background-color: white;
+    background-color: #f2f4f4;
     color: $bg;
     padding: 5px 10px;
     border-radius: 5px;

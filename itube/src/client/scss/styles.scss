@@ -1,13 +1,15 @@
 @import "./config/_reset.scss";
 @import "./config/_variables.scss";
 
-@import "./components/header.scss";
-@import "./components/footer.scss";
 @import "./components/video.scss";
-@import "./components/shared.scss";
 @import "./components/forms.scss";
+@import "./components/shared.scss";
+@import "./components/footer.scss";
+@import "./components/header.scss";
+@import "./components/video-player.scss";
 @import "./components/social-login.scss";
 
+@import "./screens/home.scss";
 @import "./screens/search.scss";
 @import "./screens/profile.scss";
 @import "./screens/edit-profile.scss";
@@ -18,8 +20,10 @@ a {
 }
 
 body {
+  width: 90%;
   color: whitesmoke;
   background-color: $bg;
+  margin: 0 auto 0;
 }
 
 main {
