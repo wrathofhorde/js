@@ -5,6 +5,7 @@ const { watch } = require("fs");
 module.exports = {
   entry: {
     main: "./src/client/js/main.js",
+    recorder: "./src/client/js/recorder.js",
     videoPlayer: "./src/client/js/videoPlayer.js",
   },
   output: {
