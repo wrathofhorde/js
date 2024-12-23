@@ -1,3 +1,6 @@
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { fetchFile } from "@ffmpeg/util";
+
 const preview = document.getElementById("preview");
 const startBtn = document.getElementById("startBtn");
 
@@ -21,10 +24,30 @@ const init = async () => {
 
 init();
 
-const handleDownloadRecording = () => {
+const handleDownloadRecording = async () => {
+  const inputFile = "recording.mkv";
+  const outputFile = "output.mp4";
+
+  const ffmpeg = new FFmpeg();
+  await ffmpeg.load({ log: true });
+  await ffmpeg.writeFile(inputFile, await fetchFile(videofile));
+  await ffmpeg.exec(["-i", inputFile, "-r", "60", outputFile]);
+  await ffmpeg.exec([
+    "-i",
+    inputFile,
+    "-ss",
+    "00:00:01",
+    "-frames:v",
+    "1",
+    "thumbnail.jpg",
+  ]);
+  const mp4File = await ffmpeg.readFile(outputFile);
+  const mp4Blob = new Blob([mp4File.buffer], { type: "video/mp4" });
+  const mp4Url = URL.createObjectURL(mp4Blob);
+
   const a = document.createElement("a");
-  a.href = videofile;
-  a.download = "MyRecording";
+  a.href = mp4Url;
+  a.download = "MyRecording.mp4";
   document.body.appendChild(a);
   a.click();
 

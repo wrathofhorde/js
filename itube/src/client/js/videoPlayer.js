@@ -30,6 +30,14 @@ const videoPlay = () => {
 
 playBtn.addEventListener("click", videoPlay);
 
+video.addEventListener("click", videoPlay);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === " ") {
+    videoPlay();
+  }
+});
+
 muteBtn.addEventListener("click", (event) => {
   video.muted = !video.muted;
   //   console.log(video.volume);
@@ -72,8 +80,6 @@ video.addEventListener("timeupdate", () => {
   currentTime.innerText = formatTime(video.currentTime);
 });
 
-video.addEventListener("click", videoPlay);
-
 video.addEventListener("ended", async () => {
   const { id } = videoContainer.dataset;
   const response = await fetch(`/api/videos/${id}/view`, {
@@ -85,7 +91,10 @@ video.addEventListener("ended", async () => {
     return;
   }
 
-  console.log("fetch success");
+  video.currentTime = 0;
+  timeline.value = Math.floor(video.currentTime);
+  currentTime.innerText = formatTime(video.currentTime);
+  playBtnIcon.classList = "fas fa-play";
 });
 
 const videoControlsClasName = "showing";
