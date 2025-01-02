@@ -168,3 +168,16 @@ export const registerView = async (req, res) => {
 
   return res.sendStatus(200);
 };
+
+export const addComment = async (req, res) => {
+  const {
+    params: id,
+    body: { text },
+  } = req;
+
+  console.log(req.body);
+
+  console.log(id, text);
+
+  res.sendStatus(200);
+};

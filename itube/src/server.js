@@ -14,6 +14,7 @@ const serv = express();
 serv.set("view engine", "pug");
 serv.set("views", process.cwd() + "/src/views");
 serv.use(morgan("dev"));
+serv.use(express.json());
 serv.use(express.urlencoded({ extended: true }));
 serv.use(
   session({
@@ -23,19 +24,19 @@ serv.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
-serv.use(flash())
+serv.use(flash());
 serv.use("/static", express.static("assets"));
 serv.use("/uploads", express.static("uploads"));
 
 // serv.use((req, res, next) => {
-  //   req.sessionStore.all((err, obj) => {
-    //     console.log(obj);
-    //     next();
-    //   });
-    // });
-    
+//   req.sessionStore.all((err, obj) => {
+//     console.log(obj);
+//     next();
+//   });
+// });
+
 serv.use(localMiddleware);
-    
+
 serv.use("/", rootRouter);
 serv.use("/api", apiRouter);
 serv.use("/users", userRouter);
