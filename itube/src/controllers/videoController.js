@@ -95,7 +95,7 @@ export const postUpload = async (req, res) => {
       files: { video, thumb },
       body: { title, description, hashtags },
     } = req;
-    console.log(req.files);
+    // console.log(req.files);
     const newVideo = await Video.create({
       fileUrl: video[0].path,
       thumbUrl: thumb[0].path,
@@ -194,6 +194,6 @@ export const addComment = async (req, res) => {
   });
 
   video.comments.push(comment._id);
-  video.save();
+  await video.save();
   res.status(201).json({ newCommentId: comment._id });
 };

@@ -31,5 +31,33 @@
     background-color: white;
     color: black;
     margin-bottom: 10px;
+    // .mark {
+    //   margin-left: 5px;
+    // }
+    .mark:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.video__add-comments {
+  .video__comment-form {
+    max-width: 600px;
+    display: flex;
+    padding: 15px;
+    textarea {
+      resize: none;
+      width: 400px;
+      height: 40px;
+    }
+    button {
+      width: 140px;
+      margin-left: 20px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: white;
+      font-size: 16px;
+      color: black;
+    }
   }
 }
