@@ -9,7 +9,7 @@ const markOnClickHandler = async (event) => {
   const commentId = parent.getAttribute(dataId);
 
   const response = await fetch(`/api/comments/delete`, {
-    method: "POSt",
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
