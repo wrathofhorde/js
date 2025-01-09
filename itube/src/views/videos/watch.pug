@@ -41,7 +41,8 @@ block content
                 li.video__comment(data-id=comment._id)
                     i.fas.fa-comment
                     span=` ${comment.text}`
-                    span.mark=" ❌"
+                    if String(comment.owner) === String(user._id)
+                        span.mark=" ❌"
 
 block scripts 
     script(src="/static/js/videoPlayer.js") 

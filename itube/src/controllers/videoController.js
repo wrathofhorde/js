@@ -173,27 +173,42 @@ export const registerView = async (req, res) => {
 };
 
 export const addComment = async (req, res) => {
-  const {
-    session: { user },
-    params: { id },
-    body: { text },
-  } = req;
+  try {
+    const {
+      session: { user },
+      params: { id },
+      body: { text },
+    } = req;
 
-  // console.log(id, text, user);
+    // console.log(id, text, user);
 
-  const video = await Video.findById(id);
+    const video = await Video.findById(id);
 
-  if (!video) {
-    return res.sendStatus(404);
+    if (!video) {
+      return res.sendStatus(404);
+    }
+
+    const commentUser = await User.findById(user._id);
+    console.log(commentUser);
+
+    if (!commentUser) {
+      return res.sendStatus(404);
+    }
+
+    const comment = await Comment.create({
+      text,
+      owner: user._id,
+      videos: id,
+    });
+
+    video.comments.push(comment._id);
+    await video.save();
+
+    commentUser.comments.push(comment._id);
+    await commentUser.save();
+
+    res.status(201).json({ newCommentId: comment._id });
+  } catch (e) {
+    console.log(e);
   }
-
-  const comment = await Comment.create({
-    text,
-    owner: user._id,
-    videos: id,
-  });
-
-  video.comments.push(comment._id);
-  await video.save();
-  res.status(201).json({ newCommentId: comment._id });
 };
