@@ -18,8 +18,8 @@ export const removeComment = async (req, res) => {
     return res.sendStatus(400);
   }
 
-  console.log(video);
-  console.log(comment);
+  //   console.log(video);
+  //   console.log(comment);
 
   video.comments.pull(commentId);
   await video.save();
