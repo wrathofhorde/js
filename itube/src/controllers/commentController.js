@@ -15,7 +15,7 @@ export const removeComment = async (req, res) => {
   }
 
   const commentUser = await User.findById(user._id);
-  console.log(commentUser);
+  //   console.log(commentUser);
   if (!commentUser) {
     return res.sendStatus(400);
   }

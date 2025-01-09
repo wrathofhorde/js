@@ -53,7 +53,7 @@ volumeRange.addEventListener("input", (event) => {
   } = event;
 
   video.volume = value;
-  console.log(value, typeof value);
+  // console.log(value, typeof value);
   muteBtnIcon.classList =
     value === "0" ? "fas fa-volume-mute" : "fas fa-volume-up";
 });
