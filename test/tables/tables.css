@@ -17,6 +17,7 @@
   width: 35%;
   height: 100%;
   background-color: aliceblue;
+  position: relative;
 }
 
 .scroll {
@@ -48,6 +49,9 @@
 .scroll table {
   width: 540px;
   border-collapse: collapse;
+  position: relative;
+  top: 0px;
+  left: -1px;
 }
 
 .scroll table th {
