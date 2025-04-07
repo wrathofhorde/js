@@ -1,0 +1,19 @@
+{
+  "name": "meta",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ethers": "^6.13.5",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
+  }
+}

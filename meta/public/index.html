@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>MetaMask 연동 데모</h1>
+    <button onclick="connectWallet()">지갑 연결</button>
+    <button onclick="signMessage()" disabled id="signButton">
+      메시지 서명
+    </button>
+    <p id="account">연결된 계정: 없음</p>
+    <p id="network">네트워크: 확인되지 않음</p>
+    <p id="signature">서명: 없음</p>
+    <script src="index.js"></script>
+  </body>
+</html>
